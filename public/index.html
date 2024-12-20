@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoinTrack - Real-Time Cryptocurrency Prices</title>
+  <style>
+    body {
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      background-color: #1d1f21;
+      color: #f1f1f1;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    header {
+      background-color: #333;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5em;
+      color: #f5a623;
+    }
+    .nav-bar {
+      display: flex;
+      justify-content: center;
+      background-color: #222;
+      padding: 10px;
+    }
+    .nav-bar a {
+      color: #fff;
+      padding: 14px 20px;
+      text-decoration: none;
+      font-size: 1.1em;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+    .nav-bar a:hover {
+      background-color: #f5a623;
+    }
+    .coin-list {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-gap: 15px;
+      margin: 20px;
+    }
+    .coin-item {
+      background-color: #2b2f33;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .coin-item img {
+      width: 40px;
+      height: 40px;
+    }
+    .coin-item h3 {
+      margin-top: 10px;
+      font-size: 1.2em;
+      color: #f5a623;
+    }
+    .coin-item p {
+      font-size: 1.1em;
+      color: #f1f1f1;
+      margin-top: 5px;
+    }
+    .coin-item .price {
+      font-size: 1.2em;
+      margin-top: 10px;
+      color: #34c759;
+    }
+    footer {
+      background-color: #333;
+      padding: 15px;
+      text-align: center;
+      font-size: 1em;
+      color: #f1f1f1;
+    }
+    @media (max-width: 768px) {
+      .coin-list {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 480px) {
+      .coin-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CoinTrack - Real-Time Cryptocurrency Prices</h1>
+  </header>
+
+
+
+  <div class="coin-list" id="coin-list"></div>
+
+  <footer>
+    <p>Made with ❤️ by CoinTrack| <a href="https://www.coingecko.com/en" style="color: #f5a623;">Powered by CoinGecko</a></p>
+    <p>&copy; 2024 David Obinta. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Updated API URL without VET and with Quidax
+    const apiUrl = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,cardano,binancecoin,xrp,solana,polkadot,litecoin,uniswap,dogecoin,shiba-inu,terraluna,chainlink,quidax&order=market_cap_desc&per_page=30&page=1&sparkline=false';
+    
+    async function fetchCoins() {
+      const response = await fetch(apiUrl);
+      const coins = await response.json();
+      const coinListElement = document.getElementById('coin-list');
+      
+      coins.forEach(coin => {
+        const coinElement = document.createElement('div');
+        coinElement.classList.add('coin-item');
+        
+        coinElement.innerHTML = `
+          <img src="${coin.image}" alt="${coin.name}">
+          <h3>${coin.name}</h3>
+          <p>${coin.symbol.toUpperCase()}</p>
+          <p class="price">$${coin.current_price.toFixed(2)}</p>
+        `;
+        
+        coinListElement.appendChild(coinElement);
+      });
+    }
+    
+    fetchCoins();
+  </script>
+
+</body>
+</html>
