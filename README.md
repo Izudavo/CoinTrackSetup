@@ -1,4 +1,5 @@
 CoinTrack Project Documentation
+
 1. Project Overview
 CoinTrack is a real-time cryptocurrency tracking web application that displays the latest prices of popular cryptocurrencies. Powered by the CoinGecko API, it provides a user-friendly interface with essential information like the coin’s name, symbol, and current price. The app aims to offer real-time updates on multiple cryptocurrencies in an organized and visually appealing grid format.
 
@@ -12,7 +13,7 @@ Error handling to ensure smooth user experience in case of failed data fetch.
 3. Technologies Used
 Frontend: HTML, CSS, JavaScript
 API: CoinGecko API for fetching cryptocurrency data.
-Hosting: Firebase Hosting (or another platform you're using)
+Hosting: Firebase Hosting
 Version Control: Git, GitHub for source code management
 
 
